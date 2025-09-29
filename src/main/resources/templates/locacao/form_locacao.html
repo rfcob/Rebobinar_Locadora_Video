@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Locação</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/form_style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+</nav>
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Registrar Nova Locação</h2>
+            <form th:action="@{/locacoes}" th:object="${locacaoDto}" method="post" class="row g-3">
+                <div class="col-md-12">
+                    <label for="cliente" class="form-label">Cliente*:</label>
+                    <select th:field="*{clienteId}" id="cliente" class="form-select" required>
+                        <option value="">Selecione um cliente</option>
+                        <option th:each="cli : ${clientes}" th:value="${cli.id}" th:text="${cli.nome}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="filmes" class="form-label">Filmes* (segure CTRL ou SHIFT para selecionar vários):</label>
+                    <select th:field="*{filmeIds}" id="filmes" class="form-select" required multiple="multiple" size="8">
+                        <option th:each="f : ${filmes}" th:value="${f.id}" th:text="${f.nome}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="dataLocacao" class="form-label">Data da Locação*:</label>
+                    <input type="date" th:field="*{dataLocacao}" id="dataLocacao" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="dataDevolucao" class="form-label">Previsão de Devolução:</label>
+                    <input type="date" th:field="*{dataDevolucao}" id="dataDevolucao" class="form-control">
+                </div>
+
+                <div class="col-12 d-flex justify-content-center gap-3 mt-4">
+                    <button type="submit" class="btn btn-primary">Salvar Locações</button>
+                    <a th:href="@{/landing}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

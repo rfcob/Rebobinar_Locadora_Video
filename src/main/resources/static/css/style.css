@@ -1,0 +1,114 @@
+/*Zerando as margens e espaçamentos padrões gerados pelos navegadores.*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Boa prática: inclui padding e border no tamanho total do elemento */
+}
+
+
+/*O variaveis para  css inteiro*/
+:root {
+    --branco-principal: #FFFFFF;
+    --cinza-secundario: #e1e1e1;
+    --botao-azul: #167BF7;
+    --cor-de-fundo: #00030C;
+    --fonte-principal: "Inter", sans-serif; /* Adicionei 'sans-serif' como fallback */
+}
+
+/*________________________________________________________________________________*/
+body {
+    background-color: var(--cor-de-fundo);
+    color: var(--branco-principal);
+    font-family: var(--fonte-principal);
+    font-size: 16px;
+    font-weight: 400;
+    min-height: 100vh; /* Garante que o body ocupe toda a altura */
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    text-align: center;
+}
+
+/* Estilos bem vindo _______________________________________________________________*/
+.container-boas-vindas {
+    max-width: 600px; /* Limita a largura do card */
+    padding: 3em;
+    background-color: rgba(255, 255, 255, 0.05); /* Um fundo sutil, semi-transparente */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+    margin: 2em;
+}
+
+.container-boas-vindas h1 {
+    font-size: 2.5em; /* Tamanho do título */
+    font-weight: 700;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+    color: var(--branco-principal);
+}
+
+.container-boas-vindas p {
+    font-size: 1.1em;
+    color: var(--cinza-secundario);
+    margin-bottom: 2em;
+}
+
+/* Botão "Entrar"_______________________________________________________________ */
+.botao-entrar {
+    background-color: var(--botao-azul);
+    border-radius: 5px;
+    padding: 1em 2em; /* Espaçamento interno maior para o botão */
+    color: var(--branco-principal);
+    display: inline-block; /* Para o padding funcionar corretamente */
+    text-decoration: none;
+    font-size: 1.2em; /* Tamanho da fonte do botão */
+    transition: background-color 0.3s ease; /* Transição suave no hover */
+}
+
+.botao-entrar:hover {
+    background-color: #4e92e6; /* Cor ligeiramente mais clara no hover */
+}
+
+/* Estilos do rodapé, se você quiser adicionar um pequeno rodapé aqui */
+.rodape {
+    position: absolute;
+    bottom: 1.5em;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--cinza-secundario);
+}
+
+/* Logo */
+.logoP {
+    width: 70%;
+}
+
+.principal {
+    min-height: 100vh; /* ocupa a tela inteira */
+    background-image:
+            linear-gradient(to right, #00030C, rgba(0, 3, 12, 0) 10%),
+            linear-gradient(to left, #00030C, rgba(0, 3, 12, 0) 10%),
+            url("/img/filmes_fatias.png");
+    background-size: cover;
+    background-position: top right; /* fixa no topo à direita */
+    display: flex;
+    color: var(--branco-principal);
+    padding-left: 35%; /* dá um respiro do lado esquerdo */
+}
+
+/*______________Aproveitado, apenas controle de espaço_________gambiarra (faltou tempo_______________*/
+.container_vazio1 {
+    margin: 0 6em;
+    /*0 para em cima e em baixo, poderia ser como no proximo  container*/
+}
+
+.container_vazio2 {
+    margin: 0 6em;
+    /*0 para em cima e em baixo, poderia ser como no proximo  container*/
+}
+
+.container__imagem {
+    margin: 1em 0 2em 0; /*como um relogio, em cima, direita, em baixo e esquerda*/
+}
+

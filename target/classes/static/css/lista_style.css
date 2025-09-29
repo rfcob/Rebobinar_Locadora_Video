@@ -1,0 +1,56 @@
+/* ==================================================== */
+/* Estilos Customizados para a Página             */
+/* de Formulário de Filmes                        */
+/* ==================================================== */
+
+
+/* 1. Cor de fundo da página (body) */
+/*body {
+    background-color: #6a0007;
+}*/
+body {
+    background: linear-gradient(-45deg, #000000, #b6b2b2, #000000);
+    background-size: 400% 400%;
+    animation: liquidoFluido 35s ease-in-out infinite;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Animação fluida */
+@keyframes liquidoFluido {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.bg-custom-dark {
+    background-color: transparent; /* ou #000000, ou gradiente */
+    color: #ffffff;
+}
+
+/* (Navbar) _______________________________________________________*/
+.navbar.bg-dark {
+    background-color: #370000 !important;
+}
+
+.navbar .nav-link {
+    color: #ffffff !important;
+}
+
+
+/* Título principal __________________________________________________*/
+body.body_devolucao h1.mb-4 {
+    color: #ffffff !important;
+}
+
+/* Título Resultados ________________________________________________*/
+body.body_devolucao h2.h4 {
+    color: #ffffff !important;
+}

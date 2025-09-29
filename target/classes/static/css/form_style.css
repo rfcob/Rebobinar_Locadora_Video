@@ -1,0 +1,72 @@
+
+/* Estilos Customizados para a Página de formulários*/
+
+body {
+    background: linear-gradient(-45deg, #000000, #b6b2b2, #000000);
+    background-size: 400% 400%;
+    animation: liquidoFluido 35s ease-in-out infinite;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Animação fluida */
+@keyframes liquidoFluido {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.bg-custom-dark {
+    background-color: transparent; /* ou #000000, ou gradiente */
+    color: #ffffff;
+}
+
+/* Cor customizada para a Barra de Navegação (Navbar) */
+.navbar.bg-dark {
+    background-color: #370000 !important;
+}
+
+.navbar .nav-link {
+    color: #ffffff !important;
+}
+
+
+/* Estilos para os botões do formulário */
+
+/* Botão de Salvar/Atualizar */
+.btn-custom-save {
+    background-color: #5d706c; /* Verde-água */
+    border-color: #1abc9c;
+    color: white;
+    font-weight: bold;
+    padding: 10px 25px;
+    transition: background-color 0.2s ease-in-out; /* Efeito suave */
+}
+
+.btn-custom-save:hover {
+    background-color: #16a085;
+    border-color: #16a085;
+}
+
+/* Botão de Cancelar */
+.btn-custom-cancel {
+    background-color: #95a5a6; /* Cinza */
+    border-color: #95a5a6;
+    color: white;
+    padding: 10px 25px;
+    transition: background-color 0.2s ease-in-out; /* Efeito suave */
+}
+
+/**hover: efeito no botão*/
+.btn-custom-cancel:hover {
+    background-color: #7f8c8d;
+    border-color: #7f8c8d;
+}
+
