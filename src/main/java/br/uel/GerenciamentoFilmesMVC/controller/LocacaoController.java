@@ -93,7 +93,7 @@ public class LocacaoController {
         return "locacao/form_devolucao";
     }
 
-    // Busca locações pendentes de devolução com base em um termo
+    // Busca locações pendentes de devolução
     @PostMapping("/devolucao/buscar")
     public String buscarLocacoesParaDevolucao(@RequestParam(name = "termoBusca", required = false) String termo,
                                               Model model) {

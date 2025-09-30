@@ -58,11 +58,32 @@
                             <input th:field="*{anoLancamento}" id="ano_lancamento" type="number" class="form-control" required placeholder="Ex: 1994">
                         </div>
 
-                        <!-- Campo: Categoria -->
+                        <!-- Campo: Categoria
                         <div class="mb-3">
                             <label for="categoria" class="form-label"><strong>Categoria:</strong></label>
                             <input th:field="*{categoria}" id="categoria" type="text" class="form-control" placeholder="Ex: Drama, Ação, Comédia">
-                        </div>
+                        </div> -->
+
+                        <!-- Campo: Categoria -->
+                        <select th:field="*{categoria}" class="form-select">
+                            <option value="" disabled selected>Selecione uma categoria</option>
+                            <option value="Drama/Romance">Drama/Romance</option>
+                            <option value="Fantasia/Aventura">Fantasia/Aventura</option>
+                            <option value="Ação/Drama">Ação/Drama</option>
+                            <option value="Ficção Científica/Ação">Ficção Científica/Ação</option>
+                            <option value="Crime/Drama">Crime/Drama</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Drama/Crime">Drama/Crime</option>
+                            <option value="Suspense/Drama">Suspense/Drama</option>
+                            <option value="Animação/Aventura">Animação/Aventura</option>
+                            <option value="Ficção Científica/Drama">Ficção Científica/Drama</option>
+                            <option value="Biografia/Música">Biografia/Música</option>
+                            <option value="Drama/Histórico">Drama/Histórico</option>
+                            <option value="Musical/Romance">Musical/Romance</option>
+                            <option value="Suspense/Mistério">Suspense/Mistério</option>
+                            <option value="Crime/Suspense">Crime/Suspense</option>
+                            <option value="Drama/Guerra">Drama/Guerra</option>
+                        </select>
 
                         <!-- Campo: Duração -->
                         <div class="mb-3">

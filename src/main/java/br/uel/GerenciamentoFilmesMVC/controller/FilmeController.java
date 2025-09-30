@@ -124,4 +124,14 @@ public class FilmeController {
         }
         return "redirect:/filmes";
     }
+
+    //lista categorias
+    @GetMapping("/filmes/novo")
+    public String novoFilmeForm(Model model) {
+        List<String> categorias = List.of("Drama", "Ação", "Comédia", "Suspense");
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("filme", new Filme());
+        return "formulario-filme";
+    }
+
 }
