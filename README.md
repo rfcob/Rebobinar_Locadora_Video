@@ -35,7 +35,7 @@ Imaginada como um painel de controles para os administradores da locadora
 ![l_c](./img/listar_clientes.png)
 ![l_f](./img/listar_filmes.png)
 
-### Cadastrando
+### Cadastrando Clientes e Filme
 
 ![n_c](./img/novo_cliente.png)
 ![n_f](./img/novo_filme.png)
