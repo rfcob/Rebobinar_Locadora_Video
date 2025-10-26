@@ -18,13 +18,17 @@ Foi usado também JPA para validação antes de persistir os dados no banco de d
 
 ### Index - página de boas vindas
 
+![index](./img/index.png)
+
+### Login
+
 ![index](./img/login.png)
 
 ### Landing - Dashboard do locadora
 
 Imaginada como um painel de controles para os administradores da locadora
 
-![landing](./img/landing.png)
+![landing](./img/nova_landing.png)
 
 ### Listando clientes e Filmes
 
@@ -46,6 +50,10 @@ Imaginada como um painel de controles para os administradores da locadora
 ### Histórico de Locações
 
 ![hl](./img/historico.png)
+
+### Visão do Cliente
+
+![hl](./img/cliente_sessao.png)
 
 # Referências
 
