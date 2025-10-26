@@ -28,7 +28,7 @@ Foi usado também JPA para validação antes de persistir os dados no banco de d
 
 Imaginada como um painel de controles para os administradores da locadora
 
-![landing](./img/nova_landing.png)
+![nova_landing](./img/nova_landing.png)
 
 ### Listando clientes e Filmes
 
