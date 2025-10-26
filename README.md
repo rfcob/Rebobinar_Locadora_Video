@@ -18,11 +18,11 @@ Foi usado também JPA para validação antes de persistir os dados no banco de d
 
 ### Index - página de boas vindas e link/botão entrar
 
-![index](./img/index_2.png)
+![index](./img/index.png)
 
 ### Login/modal
 
-![index](./img/login_2.png)
+![index](./img/login.png)
 
 ### Landing - Dashboard do locadora
 
@@ -33,20 +33,17 @@ Imaginada como um painel de controles para os administradores da locadora
 ### Listando clientes e Filmes
 
 ![l_c](./img/listar_clientes_2.png)
-
 ![l_f](./img/listar_filmes_2.png)
 
 ### Cadastrando Clientes e Filmes
 
 ![n_c](./img/novo_cliente_2.png)
-
 ![n_f](./img/novo_filme_2.png)
 
 
 ### Cadastrando uma nova Locação e baixa após devolução
 
 ![loc](./img/locacao_2.png)
-
 ![dev](./img/devolucao_2.png)
 
 
