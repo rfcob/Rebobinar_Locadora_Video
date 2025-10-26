@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filme - Formulário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="/css/form_style.css">-->
+    <link rel="stylesheet" th:href="@{/css/form_style.css}">
+</head>
+<body class="bg-custom-dark">
+
+<!-- Barra de navegação  -->
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/landing}">Gerenciamento de Filmes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/filmes}">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/filmes/novo}">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/landing}">Início</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:history.back()">Voltar</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Container formulário -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <div class="card">
+                <div class="card-body  bg-body-secondary">
+
+                    <!-- Título dinâmico: "Editar Filme" ou "Novo Filme" -->
+                    <h2 class="text-center mb-4" th:text="${filme.id} != null ? 'Editar Filme' : 'Novo Filme'"></h2>
+
+                    <!-- Formulário de cadastro/edição de filme -->
+                    <form th:object="${filme}"
+                          th:action="${filme.id == null} ? @{/filmes} : @{/filmes/{id}(id=${filme.id})}"
+                          method="post"
+                          class="col-md-8 mx-auto">
+
+                        <!-- Campo oculto para simular metodo PUT -->
+                        <input th:if="${filme.id != null}" type="hidden" name="_method" value="put"/>
+
+                        <!-- Campo: Nome do filme -->
+                        <div class="mb-3">
+                            <label for="nome" class="form-label"><strong>Nome*:</strong></label>
+                            <input th:field="*{nome}" id="nome" type="text" class="form-control" required placeholder="Título do filme">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                        </div>
+
+                        <!-- Campo: Ano de lançamento -->
+                        <div class="mb-3">
+                            <label for="ano_lancamento" class="form-label"><strong>Ano de Lançamento*:</strong></label>
+                            <input th:field="*{anoLancamento}" id="ano_lancamento" type="number" class="form-control" required placeholder="Ex: 1994">
+                        </div>
+
+                        <!-- Campo: Categoria
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label"><strong>Categoria:</strong></label>
+                            <input th:field="*{categoria}" id="categoria" type="text" class="form-control" placeholder="Ex: Drama, Ação, Comédia">
+                        </div> -->
+
+                        <!-- Campo: Categoria -->
+                        <select th:field="*{categoria}" class="form-select">
+                            <option value="" disabled selected>Selecione uma categoria</option>
+                            <option value="Drama/Romance">Drama/Romance</option>
+                            <option value="Fantasia/Aventura">Fantasia/Aventura</option>
+                            <option value="Ação/Drama">Ação/Drama</option>
+                            <option value="Ficção Científica/Ação">Ficção Científica/Ação</option>
+                            <option value="Crime/Drama">Crime/Drama</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Drama/Crime">Drama/Crime</option>
+                            <option value="Suspense/Drama">Suspense/Drama</option>
+                            <option value="Animação/Aventura">Animação/Aventura</option>
+                            <option value="Ficção Científica/Drama">Ficção Científica/Drama</option>
+                            <option value="Biografia/Música">Biografia/Música</option>
+                            <option value="Drama/Histórico">Drama/Histórico</option>
+                            <option value="Musical/Romance">Musical/Romance</option>
+                            <option value="Suspense/Mistério">Suspense/Mistério</option>
+                            <option value="Crime/Suspense">Crime/Suspense</option>
+                            <option value="Drama/Guerra">Drama/Guerra</option>
+                        </select>
+
+                        <!-- Campo: Duração -->
+                        <div class="mb-3">
+                            <label for="duracao" class="form-label"><strong>Duração (min):</strong></label>
+                            <input th:field="*{duracao}" id="duracao" type="number" class="form-control" placeholder="Ex: 120">
+                        </div>
+
+                        <!-- Campo: Vencedor do Oscar -->
+                        <div class="mb-3">
+                            <label for="vencedorOscar" class="form-label"><strong>Vencedor do Oscar:</strong></label>
+                            <select th:field="*{vencedorOscar}" id="vencedorOscar" class="form-select">
+                                <option value="">Selecione...</option>
+                                <option value="true">Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+                        </div>
+
+                        <!-- Campo: Direção -->
+                        <div class="mb-3">
+                            <label for="direcao" class="form-label"><strong>Direção:</strong></label>
+                            <input th:field="*{direcao}" id="direcao" type="text" class="form-control" placeholder="Nome do diretor">
+                        </div>
+
+                        <!-- Campo: Elenco principal -->
+                        <div class="mb-3">
+                            <label for="elencoPrincipal" class="form-label"><strong>Elenco Principal:</strong></label>
+                            <textarea th:field="*{elencoPrincipal}" id="elencoPrincipal" class="form-control" rows="3" placeholder="Atores principais"></textarea>
+                        </div>
+
+                        <!-- Campo: Cópias disponíveis -->
+                        <div class="mb-3">
+                            <label for="copiasDisponiveis" class="form-label"><strong>Cópias Disponíveis:</strong></label>
+                            <input th:field="*{copiasDisponiveis}" id="copiasDisponiveis" type="number" class="form-control" min="1" max="6" required>
+                        </div>
+
+                        <!-- Nota sobre campos obrigatórios -->
+                        <p class="form-text">* Campos obrigatórios</p>
+
+                        <!-- Botões de ação -->
+                        <div class="d-flex justify-content-center gap-3 mt-4">
+                            <button type="submit" class="btn btn-custom-save" th:text="${filme.id} != null ? 'Atualizar' : 'Cadastrar'"></button>
+                            <a th:href="@{/landing}" class="btn btn-custom-cancel">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

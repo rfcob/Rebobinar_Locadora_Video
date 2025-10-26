@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmes - Lista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/lista_style.css">
+</head>
+<body>
+
+<!-- Barra de Navegação -->
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/landing}">Cadastro</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/clientes/novo}">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/landing}">Início</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mx-auto">
+            <div class="card mt-4 mb-4">
+                <div class="card-body bg-custom">
+                    <h2 class="text-center mb-4">Clientes</h2>
+
+                    <!-- Mensagem de sucesso -->
+                    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <span th:text="${success}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Mensagem de erro -->
+                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span th:text="${error}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Tabela -->
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Itera para gerar a tabela a partir dos dados -->
+                            <tr th:each="cliente : ${clientes}">
+                                <td th:text="${cliente.nome}"></td>
+                                <td th:text="${cliente.email}"></td>
+                                <td th:text="${cliente.telefone}"></td>
+                                <td>
+                                    <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-primary btn-sm">Editar</a>
+
+                                    <form th:action="@{/clientes/{id}(id=${cliente.id})}" method="post" class="d-inline">
+                                        <input type="hidden" name="_method" value="delete"/>
+                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Tem certeza que deseja excluir este cliente?');">Excluir
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

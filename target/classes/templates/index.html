@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-R">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bem-vindo à Locadora</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<section class="container principal"><div class="container__caixa">
+    <h1 class="container_vazio2"></h1>
+    <p class="container_vazio1"></p>
+</div>
+</section>
+
+<section class="container-boas-vindas">
+    <img src="/img/logo.png" alt="Logo da Locadora" class="logoP" >
+    <h1>Bem-vindo à Rebobinar</h1>
+    <p>Sistema de Gestão.</p>
+    <p>Acesse o sistema para gerenciar filmes, clientes e locações.</p>
+
+    <!--<button id="openLoginModalBtn" class="botao-entrar">Entrar no Sistema</button>-->
+
+    <a th:if="${session.clienteLogado != null}"
+       th:href="${session.clienteLogado.role == 'ROLE_ADMIN'} ? @{/landing} : @{/minha-conta}"
+       class="botao-entrar">
+       Entrar
+    </a>
+
+    <button th:unless="${session.clienteLogado != null}"
+            id="openLoginModalBtn"
+            class="botao-entrar">
+            Entrar
+    </button>
+
+</section>
+
+<footer class="rodape">
+    <p>&copy; 2025 Rebobinar. By Rafael Cobo. Creative Commons: CC BY.</p>
+</footer>
+
+
+<div id="loginModal" class="modal-backdrop">
+    <div class="modal-content">
+        <span class="modal-close" id="closeLoginModalBtn">&times;</span>
+        <h2>Login</h2>
+
+        <form id="loginForm">
+            <div>
+                <label for="email">Usuário (email):</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            <div id="loginError">Credenciais inválidas!</div>
+
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+</div>
+<script src="/js/loginModal.js" defer></script>
+
+</body>
+</html>

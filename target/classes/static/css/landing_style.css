@@ -1,0 +1,141 @@
+
+body {
+    background: linear-gradient(-45deg, #000000, #b6b2b2, #000000);
+    background-size: 400% 400%;
+    animation: liquidoFluido 35s ease-in-out infinite;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Animação fluida */
+@keyframes liquidoFluido {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/**Barra de Navegação_______________________________________________*/
+.navbar-marca img {
+    width: 7%;   /* aumenta 25% em relação ao tamanho original */
+    height: auto;  /* mantém a proporção */
+}
+
+.navbar.bg-dark {
+    background-color: #acacac !important;
+}
+
+.navbar.nav-link {
+    color: #ffffff !important;
+}
+
+.container{
+    color: white;!important;
+}
+
+.mt-3.text-muted {
+    color: white !important;
+}
+.display-4 {
+    color: white;!important;
+}
+
+.fs-5.text-muted {
+    color: white !important;
+}
+
+/* Container_______________________________________________________________*/
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px; /* ajusta posição vertical */
+    text-align: center;
+}
+
+/* Formulário_____________________________________________________________ */
+.search-form {
+    display: flex;
+    width: 60%; /* largura do campo de pesquisa */
+    max-width: 600px; /* não ficar gigante em telas grandes */
+}
+
+/* Pequisa__________________________________________________________________*/
+.search-input {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 24px; /*24px 0 0 24px;*/ /* borda arredondada*/
+    outline: none;
+    transition: box-shadow 0.3s;
+    text-align: center;
+}
+
+/* Efeito tsombra no pesquisa*/
+.search-input:focus {
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    border-color: #007bff;
+}
+
+/* Botão Peqsquisa___________________________________________________________*/
+.search-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0 24px 24px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+/* Texto abaixo do botaçao______________________________________________________*/
+.search-text {
+    margin-top: 15px;
+    color: #555;
+    font-size: 14px;
+}
+
+
+/*MODAL*/
+
+.modal-content {
+    border-radius: 1rem;
+    background-color: #f8f9fa;
+}
+
+.card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#resultadoModal .modal-content {
+    color: #000000 !important;
+}
+
+.btn{
+    color: darkblue;
+}
+/* Texto branco por padrão */
+.btn-lg {
+    color: #ffffff !important;
+    text-decoration: none; /* remove sublinhado */
+}
+
+/* Texto vermelho no hover */
+.btn-lg:hover {
+    color: #b8b8b8 !important;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${cliente.id == null} ? 'Novo Cliente' : 'Editar Cliente'"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/form_style.css}">
+    <!--<link rel="stylesheet" href="/css/form_style.css">-->
+</head>
+<body><!-- class="bg-custom-dark">-->
+
+
+<!--<header th:replace="~{fragments/_header :: header}"></header>-->
+
+<!-- Barra de navegação  -->
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/clientes}">Gerenciamento de Clientes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/clientes}">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/clientes/novo}">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/landing}">Início</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:history.back()">Voltar</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="card">
+                <div class="card-body bg-body-secondary">
+                    <h2 class="text-center mb-4" th:text="${cliente.id == null} ? 'Novo Cliente' : 'Editar Cliente'"></h2>
+
+                    <form th:object="${cliente}"
+                          th:action="${cliente.id == null} ? @{/clientes} : @{/clientes/{id}(id=${cliente.id})}"
+                          method="post" class="col-md-10 mx-auto">
+
+                        <input th:if="${cliente.id != null}" type="hidden" name="_method" value="put"/>
+
+                        <div class="mb-3">
+                            <label for="nome" class="form-label"><strong>Nome*:</strong></label>
+                            <input type="text" th:field="*{nome}" id="nome" class="form-control" placeholder="Nome completo do cliente">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="cpf" class="form-label"><strong>CPF*:</strong></label>
+                            <input type="text" th:field="*{cpf}" id="cpf" class="form-control" placeholder="Somente números">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label"><strong>E-mail*:</strong></label>
+                            <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="exemplo@email.com" autocomplete="off">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                        </div>
+
+                        <div class="mb-3" th:if="${cliente.id == null}">
+                            <label for="senha" class="form-label"><strong>Senha*:</strong></label>
+                            <input type="password" th:field="*{senha}" id="senha" class="form-control" placeholder="Crie uma senha de acesso" autocomplete="new-Password">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefone" class="form-label"><strong>Telefone:</strong></label>
+                            <input type="text" th:field="*{telefone}" id="telefone" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+                        </div>
+
+                        <hr class="my-4">
+                        <h4 class="mb-3">Endereço</h4>
+
+                        <div class="mb-3">
+                            <label for="cep" class="form-label"><strong>CEP*:</strong></label>
+                            <input type="text" th:field="*{cep}" id="cep" class="form-control" placeholder="00000-000">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="logradouro" class="form-label"><strong>Logradouro*:</strong></label>
+                            <input type="text" th:field="*{logradouro}" id="logradouro" class="form-control" placeholder="Rua, Avenida, etc.">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="numero" class="form-label"><strong>Número*:</strong></label>
+                                <input type="text" th:field="*{numero}" id="numero" class="form-control" placeholder="123">
+                                <div class="text-danger small" th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}"></div>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="bairro" class="form-label"><strong>Bairro*:</strong></label>
+                                <input type="text" th:field="*{bairro}" id="bairro" class="form-control" placeholder="Centro, Jardim, etc.">
+                                <div class="text-danger small" th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="complemento" class="form-label"><strong>Complemento:</strong></label>
+                            <input type="text" th:field="*{complemento}" id="complemento" class="form-control" placeholder="Apartamento, Bloco, etc.">
+                            <div class="text-danger small" th:if="${#fields.hasErrors('complemento')}" th:errors="*{complemento}"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label for="cidade" class="form-label"><strong>Cidade*:</strong></label>
+                                <input type="text" th:field="*{cidade}" id="cidade" class="form-control" placeholder="Nome da cidade">
+                                <div class="text-danger small" th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}"></div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="estado" class="form-label"><strong>Estado (UF)*:</strong></label>
+                                <input type="text" th:field="*{estado}" id="estado" class="form-control" placeholder="SP">
+                                <div class="text-danger small" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></div>
+                            </div>
+                        </div>
+                        <p class="form-text">* Campos obrigatórios</p>
+
+                        <div class="d-flex justify-content-center gap-3 mt-4">
+                            <button type="submit" class="btn btn-custom-save" th:text="${cliente.id != null} ? 'Atualizar' : 'Cadastrar'"></button>
+                            <a th:href="@{/clientes}" class="btn btn-custom-cancel">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

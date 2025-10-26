@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4" th:fragment="header">
+    <div class="container-fluid">
+        <a class="navbar-brand"th:href="@{/}">
+            <span><img src="/img/logo.png" alt="Logo da Locadora" width="60" height="60" class="me-2"></span>
+        </a>
+       <!-- <a class="navbar-brand" th:href="@{/landing}">Rebobinar</a>-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/clientes}">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/filmes}">Filmes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/locacoes}">Locações</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/locacoes/devolucao}">Devolução</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Olá, <span th:text="${session.clienteLogado.nome}"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUser">
+                        <li><a class="dropdown-item" th:href="@{/logout}">Sair (Logout)</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
