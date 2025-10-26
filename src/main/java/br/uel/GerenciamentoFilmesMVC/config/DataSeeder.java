@@ -24,18 +24,18 @@ public class DataSeeder implements CommandLineRunner {
         String adminEmail = "admin@locadora.com";
         String adminCpf = "00000000000"; // CPF fictício
 
-        // 1. Verifica se o usuário já existe (por email OU cpf)
+        //Verifica se o usuário já existe (por email OU cpf)
         if (clienteRepository.findByEmail(adminEmail).isEmpty() &&
                 clienteRepository.findByCpf(adminCpf).isEmpty()) { // MODIFICADO: Adicionado findByCpf
 
             System.out.println(">>> [DataSeeder] Criando cliente administrador de teste...");
 
-            // 2. Se não existir, cria um novo objeto Cliente
+            // e não existir, cria um novo objeto Cliente
             Cliente admin = new Cliente();
             admin.setNome("Admin da Locadora");
             admin.setEmail(adminEmail);
 
-            // 3. CRIPTOGRAFA a senha aqui mesmo
+            // CRIPTOGRAFA a senha aqui mesmo
             admin.setSenha(passwordEncoder.encode("admin123"));
 
             // Dados de endereço e pessoais (obrigatórios do seu banco)
@@ -48,7 +48,6 @@ public class DataSeeder implements CommandLineRunner {
             admin.setEstado("PR");
             admin.setAtivo(true); // Garante que ele está ativo
 
-            // 4. Salva usando o Repositório
             clienteRepository.save(admin);
 
             System.out.println(">>> [DataSeeder] Cliente administrador criado com sucesso!");

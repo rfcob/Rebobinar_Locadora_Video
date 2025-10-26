@@ -11,7 +11,7 @@
     <div class="d-grid gap-3 col-6 mx-auto">
         <a th:href="@{/templates/filmes}" class="btn btn-outline-primary">📋 Listar Filmes</a>
         <a th:href="@{/filmes/novo}" class="btn btn-outline-success">➕ Cadastrar Filme</a>
-        <a th:href="@{/filmes/editar/1}" class="btn btn-outline-warning">✏️ Editar Filme (exemplo)</a>
+        <a th:href="@{/filmes/editar/1}" class="btn btn-outline-warning">Editar Filme (exemplo)</a>
         <form th:action="@{/filmes/1}" method="post">
             <input type="hidden" name="_method" value="delete"/>
             <button type="submit" class="btn btn-outline-danger">🗑️ Excluir Filme (exemplo)</button>

@@ -2,6 +2,7 @@ package br.uel.GerenciamentoFilmesMVC.controller;
 
 import br.uel.GerenciamentoFilmesMVC.model.Filme;
 import br.uel.GerenciamentoFilmesMVC.service.FilmeService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -10,41 +11,74 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.GetMapping; // Verifique o import
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.List;
 
-// Define esta classe como um controlador
 @Controller
 @RequestMapping("/filmes")
 public class FilmeController {
 
-    // Injeta o serviço responsável pela lógica de negócio dos filmes
-    //private: somente filme controller deve acessar
     private final FilmeService filmeService;
 
-    // Construtor com injeção de dependência do FilmeService. Instâncias automáticas
+    // Constante para a chave do filtro na sessão
+    private static final String FILTRO_FILME_SESSAO = "filtroFilmeTermo";
+
     @Autowired
     public FilmeController(FilmeService filmeService) {
         this.filmeService = filmeService;
     }
 
+    @GetMapping
+    public String listar(@RequestParam(name = "termoPesquisa", required = false) String termoPesquisa,
+                         HttpSession session,
+                         Model model) {
+
+        String termoAtivo;
+
+        // Verifica se uma nova pesquisa foi submetida
+        if (termoPesquisa != null) {
+            if (termoPesquisa.trim().isEmpty()) {
+                session.removeAttribute(FILTRO_FILME_SESSAO); // Limpa se termo vazio
+                termoAtivo = null;
+            } else {
+                session.setAttribute(FILTRO_FILME_SESSAO, termoPesquisa); // Guarda na sessão
+                termoAtivo = termoPesquisa;
+            }
+        } else {
+            // Se não veio da requisição, busca na sessão
+            termoAtivo = (String) session.getAttribute(FILTRO_FILME_SESSAO);
+        }
+
+        List<Filme> filmes;
+        // Decide se busca todos ou filtra
+        if (termoAtivo != null && !termoAtivo.isEmpty()) {
+            filmes = filmeService.pesquisarFilmesPorNome(termoAtivo);
+        } else {
+            filmes = filmeService.listarFilmes();
+        }
+
+        // Adiciona ao modelo
+        model.addAttribute("filmes", filmes);
+        model.addAttribute("termoPesquisaAtivo", termoAtivo);
+        return "filmes/lista_bootstrap";
+
+    }
+
+    @GetMapping("/limpar-filtro")
+    public String limparFiltro(HttpSession session) {
+        session.removeAttribute(FILTRO_FILME_SESSAO);
+        return "redirect:/filmes";
+    }
+
     // Exibe a página de opções relacionadas a filmes
     @GetMapping("/opcoes")
     public String opcoesFilmes() {
-        return "filmes/opcoes"; // Retorna a view "opcoes"
-    }
-
-    // Exibe a lista de todos os filmes cadastrados
-    @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("filmes", filmeService.listarFilmes()); // Adiciona a lista ao modelo
-        return "filmes/lista_bootstrap"; // Retorna a view da lista
+        return "filmes/opcoes";
     }
 
     // Endpoint para pesquisa de filmes via API
     @GetMapping("/api/pesquisa")
-    @ResponseBody // Retorna os dados diretamente como JSON
+    @ResponseBody
     public List<Filme> pesquisarApi(@RequestParam(required = false, defaultValue = "") String termo) {
         return filmeService.pesquisarFilmesPorNome(termo);
     }
@@ -52,26 +86,27 @@ public class FilmeController {
     // Abre o formulário para cadastrar um novo filme
     @GetMapping("/novo")
     public String abrirCadastro(Model model) {
-        model.addAttribute("filme", new Filme()); // Cria um objeto vazio para preencher o formulário
-        return "filmes/form_bootstrap"; // Retorna a view do formulário
+        model.addAttribute("filme", new Filme());
+        return "filmes/form_bootstrap";
+
     }
 
     // Processa o envio do formulário de cadastro de filme
     @PostMapping
     public String cadastrar(@Valid @ModelAttribute Filme filme,
                             BindingResult erros,
-                            RedirectAttributes ra) {
-        // Se houver erros de validação, retorna ao formulário
+                            RedirectAttributes ra,
+                            Model model) {
         if (erros.hasErrors()) {
             return "filmes/form_bootstrap";
         }
         try {
-            // Tenta cadastrar o filme
             filmeService.cadastrarFilme(filme);
-            ra.addFlashAttribute("success", "Filme cadastrado!"); // Mensagem de sucesso
+            ra.addFlashAttribute("success", "Filme cadastrado!");
             return "redirect:/filmes";
         } catch (DataIntegrityViolationException e) {
-            ra.addFlashAttribute("error", "Erro ao cadastrar filme."); // Mensagem de erro
+            model.addAttribute("filme", filme);
+            ra.addFlashAttribute("error", "Erro ao cadastrar filme: Verifique os dados."); // Mensagem mais genérica
             return "filmes/form_bootstrap";
         }
     }
@@ -80,11 +115,11 @@ public class FilmeController {
     @GetMapping("/editar/{id}")
     public String abrirEdicao(@PathVariable Long id, Model model, RedirectAttributes ra) {
         try {
-            model.addAttribute("filme", filmeService.buscarFilme(id)); // Busca o filme pelo ID
-            return "filmes/form_bootstrap"; // Retorna a view do formulário preenchido
+            model.addAttribute("filme", filmeService.buscarFilme(id));
+            return "filmes/form_bootstrap";
         } catch (RuntimeException e) {
-            ra.addFlashAttribute("error", e.getMessage()); // Mensagem de erro se não encontrar
-            return "redirect:/filmes"; // Redireciona para a lista
+            ra.addFlashAttribute("error", e.getMessage());
+            return "redirect:/filmes";
         }
     }
 
@@ -93,9 +128,10 @@ public class FilmeController {
     public String atualizar(@PathVariable Long id,
                             @Valid @ModelAttribute Filme filme,
                             BindingResult erros,
-                            RedirectAttributes ra) {
-        // Se houver erros de validação, retorna ao formulário
+                            RedirectAttributes ra,
+                            Model model) {
         if (erros.hasErrors()) {
+            filme.setId(id);
             return "filmes/form_bootstrap";
         }
         try {
@@ -103,7 +139,9 @@ public class FilmeController {
             ra.addFlashAttribute("success", "Filme atualizado!");
             return "redirect:/filmes";
         } catch (DataIntegrityViolationException e) {
-            ra.addFlashAttribute("error", "Erro ao atualizar filme.");
+            filme.setId(id);
+            model.addAttribute("filme", filme);
+            ra.addFlashAttribute("error", "Erro ao atualizar filme: Verifique os dados.");
             return "filmes/form_bootstrap";
         } catch (RuntimeException e) {
             ra.addFlashAttribute("error", e.getMessage());
@@ -117,20 +155,11 @@ public class FilmeController {
                           RedirectAttributes ra) {
         try {
             filmeService.excluirFilme(id);
-            ra.addFlashAttribute("success", "Filme excluído!"); // Mensagem de sucesso
+            ra.addFlashAttribute("success", "Filme excluído!");
         } catch (RuntimeException e) {
-            ra.addFlashAttribute("error", e.getMessage()); // Mensagem de erro
+            ra.addFlashAttribute("error", e.getMessage());
         }
         return "redirect:/filmes";
-    }
-
-    //lista categorias
-    @GetMapping("/filmes/novo")
-    public String novoFilmeForm(Model model) {
-        List<String> categorias = List.of("Drama", "Ação", "Comédia", "Suspense");
-        model.addAttribute("categorias", categorias);
-        model.addAttribute("filme", new Filme());
-        return "formulario-filme";
     }
 
 }

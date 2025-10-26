@@ -15,14 +15,14 @@ public class WebConfig implements WebMvcConfigurer {
     private AutorizacaoInterceptor autorizacaoInterceptor;
 
     /**
-     * NOVO MÉTODO: Expõe o codificador de senha (BCrypt) como um Bean
+     * codificador de senha (BCrypt) como um Bean
      * para que o Spring possa injetá-lo no ClienteService.
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    // --- FIM DO NOVO MÉTODO ---
+    //
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
