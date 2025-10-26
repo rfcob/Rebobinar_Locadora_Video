@@ -16,11 +16,11 @@ Foi usado também JPA para validação antes de persistir os dados no banco de d
 
 ## Prints da aplicação
 
-### Index - página de boas vindas
+### Index - página de boas vindas e link/botão entrar
 
 ![index](./img/index.png)
 
-### Login
+### Login/modal
 
 ![index](./img/login.png)
 
@@ -33,25 +33,28 @@ Imaginada como um painel de controles para os administradores da locadora
 ### Listando clientes e Filmes
 
 ![l_c](./img/listar_clientes.png)
+
 ![l_f](./img/listar_filmes.png)
 
-### Cadastrando Clientes e Filme
+### Cadastrando Clientes e Filmes
 
 ![n_c](./img/novo_cliente.png)
+
 ![n_f](./img/novo_filme.png)
 
 
-### Cadastrando uma nova Locação e Dando baixa após devolução
+### Cadastrando uma nova Locação e baixa após devolução
 
 ![loc](./img/locacao.png)
+
 ![dev](./img/devolucao.png)
 
 
-### Histórico de Locações
+### Histórico de Locações por clintes
 
 ![hl](./img/historico.png)
 
-### Visão do Cliente
+### Visão do Cliente/Sessão Cliente
 
 ![hl](./img/cliente_sessao.png)
 
