@@ -18,7 +18,7 @@ Foi usado também JPA para validação antes de persistir os dados no banco de d
 
 ### Index - página de boas vindas
 
-![index](./img/index.png)
+![index](./img/login.png)
 
 ### Landing - Dashboard do locadora
 
