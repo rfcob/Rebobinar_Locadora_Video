@@ -27,7 +27,8 @@ Foi usado também JPA para validação antes de persistir os dados no banco de d
 ### Landing - Dashboard do locadora
 
 Imaginada como um painel de controles para os administradores da locadora
-![landing](./img/nova_landing.ong)
+
+![landing](./img/nova_landing.png)
 
 ### Listando clientes e Filmes
 
